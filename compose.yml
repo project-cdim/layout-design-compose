@@ -1,0 +1,46 @@
+services:
+  layout-design:
+    build:
+      context: ./
+      dockerfile: ./layout-design/Dockerfile
+      args:
+        CACHE_BUST: ${CACHE_BUST:-1}
+    container_name: layout-design
+    tty: true 
+    ports:
+      - 8011:8000
+      - 3502:3500
+    networks:
+      - cdim-net
+    volumes:
+      - ./layout-design/log:/var/log/cdim
+      - ./layout-design/config:/usr/local/lib/python3.14/site-packages/config
+      - ./layout-design/plugins:/usr/local/lib/python3.14/site-packages/plugins
+    logging:
+      options:
+        max-size: 50m
+  
+  layout-design-dapr:
+    image: daprio/daprd:edge
+    container_name: layout-design-dapr
+    command:
+      [
+        "./daprd",
+        "-app-id","layout-design",
+        "-app-port","8000",
+        "-dapr-http-port","3500",
+        "-placement-host-address","placement:50006",
+        "-config","/configuration/config.yaml"
+      ]
+    volumes:
+      - "./layout-design/dapr/configuration/:/configuration"
+    depends_on:
+      - layout-design
+    network_mode: "service:layout-design"
+    logging:
+      options:
+        max-size: 50m
+
+networks:
+  cdim-net:
+    external: true

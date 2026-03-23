@@ -1,0 +1,16 @@
+---
+layout_design:
+  host: 0.0.0.0
+  port: 8000
+policy_manager:
+  uri: http://localhost:3500/v1.0/invoke/policy-manager/method/cdim/api/v1
+  timeout: 60
+configuration_manager:
+  uri: http://localhost:3500/v1.0/invoke/configuration-manager/method/cdim/api/v1
+  timeout: 60
+server_connection:
+  retry:
+    interval: 2
+    max_count: 4
+plugin:
+  default: sample_design_engine
