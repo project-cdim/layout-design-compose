@@ -3,6 +3,7 @@ log:
   logging_level: INFO
   log_dir: /var/log/cdim
   file: sample_design_engine.log
+  file_body: sample_design_engine_body.log
   max_bytes: 300000000
   backup_files: 12
 layout_apply:

@@ -4,9 +4,19 @@ services:
       context: ./
       dockerfile: ./layout-design/Dockerfile
       args:
-        CACHE_BUST: ${CACHE_BUST:-1}
+        - CACHE_BUST=${CACHE_BUST:-1}
+        - HTTP_PROXY=${HTTP_PROXY}
+        - http_proxy=${HTTP_PROXY}
+        - HTTPS_PROXY=${HTTPS_PROXY}
+        - https_proxy=${HTTPS_PROXY}
+    environment:
+      - no_proxy=localhost,192.168.128.0/24,127.0.0.1/8,https://registry-1.docker.io/v2/
     container_name: layout-design
     tty: true 
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - NET_RAW
     ports:
       - 8011:8000
       - 3502:3500

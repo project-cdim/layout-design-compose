@@ -18,7 +18,18 @@ handlers:
     level: INFO
     formatter: standard
     stream: ext://sys.stdout
+  body:
+    class: logging.handlers.RotatingFileHandler
+    level: INFO
+    formatter: standard
+    filename: "/var/log/cdim/app_layout_design_body.log"
+    maxBytes: 300000000
+    backupCount: 12
+    encoding: "utf-8"
 loggers:
   layout_design:
     level: INFO
-    handlers: [file]
+    handlers: [ file ]
+  layout_design_body:
+    level: INFO
+    handlers: [ body ]
