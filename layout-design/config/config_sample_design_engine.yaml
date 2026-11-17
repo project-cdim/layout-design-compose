@@ -1,0 +1,10 @@
+---
+log:
+  logging_level: INFO
+  log_dir: /var/log/cdim
+  file: sample_design_engine.log
+  max_bytes: 300000000
+  backup_files: 12
+layout_apply:
+  uri: http://localhost:3500/v1.0/invoke/layout-apply/method/cdim/api/v1
+  timeout: 60

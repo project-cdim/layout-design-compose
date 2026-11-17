@@ -1,0 +1,6 @@
+[submodule "layout-design/layout-design"]
+	path = layout-design/layout-design
+	url = https://github.com/project-cdim/layout-design.git
+[submodule "layout-design/sample-design-engine-plugin"]
+	path = layout-design/sample-design-engine-plugin
+	url = https://github.com/project-cdim/sample-design-engine-plugin.git
